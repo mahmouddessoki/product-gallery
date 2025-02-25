@@ -1,0 +1,41 @@
+<div [routerLink]="['/product',product.id]"
+  class="w-full cursor-pointer bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <div class="overflow-hidden dark:bg-white dark:rounded-t-md">
+    <img class="p-8 text-center hover:scale-130 transition-all duration-300 mx-auto rounded-t-lg h-70 object-contain"
+      [src]="product.image" alt="product image" />
+  </div>
+  <div class="px-5 pb-5">
+
+    <h5 class="text-xl line-clamp-1 font-semibold tracking-tight text-gray-900 dark:text-white">
+      {{product.title}}
+    </h5>
+
+    <div class="flex items-center mt-2.5 mb-5">
+      <div class="flex items-center space-x-1 rtl:space-x-reverse">
+        <ngx-stars
+        [customPadding]="'12px'"
+        [customSize]="'20px'"
+        [readonly]="true"
+        [color]="'gold'"
+        [initialStars]="product.rating.rate" >
+        </ngx-stars>
+
+
+      </div>
+      <span
+        class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-200 dark:text-blue-800 ms-3">
+        {{product.rating.rate}}
+      </span>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-2xl font-bold text-gray-900 dark:text-white">
+        {{product.price| currency:'GBP'}}
+      </span>
+      <span
+        class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
+        {{product.category}}
+      </span>
+
+    </div>
+  </div>
+</div>
