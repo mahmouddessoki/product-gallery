@@ -24,6 +24,13 @@
       <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
         <app-product-card [product]="product" />
       </div>
+      }@empty {
+        <p class="col-span-12 text-center dark:text-white capitalize text-3xl">
+          No products found with the given search word.
+         </p>
+
+
+
       }
 
     </div>
