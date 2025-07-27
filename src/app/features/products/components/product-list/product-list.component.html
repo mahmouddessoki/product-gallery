@@ -1,38 +1,51 @@
 <section class="py-20 px-6">
-  <div class="max-w-screen-xl mx-auto ">
-    <form class="max-w-lg mx-auto mb-8">
-      <div class="relative">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 20 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-          </svg>
+  <div class="mx-auto ">
+    @if (errorMsg) {
+    <app-fallback-ui [errorMsg]="errorMsg" ></app-fallback-ui>
+    }@else {
+
+      <div class="grid grid-cols-12 gap-4" >
+        <div class="lg:col-span-3 col-span-12" >
+          <form>
+            <div class="relative">
+              <label for="default-search" class="font-bold capitalize tracking-wider dark:text-white mb-5">Filter by Product title</label>
+
+              <input [(ngModel)]="searchWord" type="search" id="default-search"
+                class="block w-full placeholder:capitalize p-3 ps-4 mt-5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search product title ... " name="search" required />
+
+
+            </div>
+          </form>
+          <app-sort-options></app-sort-options>
         </div>
-        <input [(ngModel)]="searchWord"
-         type="search" id="default-search"
-          class="block w-full placeholder:capitalize p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Search product name ... "
-          name="search" required />
 
+        <div class="grid lg:col-span-9 col-span-12  grid-cols-12 gap-5">
+
+          @for (product of products | search : searchWord; track product.id) {
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <app-product-card [product]="product" (addProdToCart)="addToCart($event)" />
+          </div>
+          }@empty {
+
+            <div class="col-span-12">
+              <div
+                class="flex max-w-xl mx-auto justify-center p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+                role="alert">
+
+                <span class="sr-only">Info</span>
+                <div class="text-2xl capitalize text-center">
+                  No products found with the given search word.
+                </div>
+              </div>
+            </div>
+
+
+
+          }
+
+        </div>
       </div>
-    </form>
-
-    <div class="grid px-5 sm:p-0 grid-cols-12 gap-5">
-
-      @for (product of FilteredProducts; track product.id) {
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3">
-        <app-product-card [product]="product" />
-      </div>
-      }@empty {
-        <p class="col-span-12 text-center dark:text-white capitalize text-3xl">
-          No products found with the given search word.
-         </p>
-
-
-
-      }
-
-    </div>
+    }
   </div>
 </section>

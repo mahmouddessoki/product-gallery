@@ -1,8 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, output, OutputEmitterRef } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IProduct } from '../../models/iproduct';
 import { NgxStarsModule } from 'ngx-stars';
+import { IProduct } from '../../models/iproduct';
 
 @Component({
   selector: 'app-product-card',
@@ -13,18 +13,12 @@ import { NgxStarsModule } from 'ngx-stars';
 export class ProductCardComponent {
 
   @Input() product: IProduct = {} as IProduct;
-
-  // @ViewChild(NgxStarsComponent)
-  // starsComponent!: NgxStarsComponent;
-  // heartIcons = {
-  //   empty: '../assets/heart-empty.svg',
-  //   half: '../assets/heart-half.svg',
-  //   full: '../assets/heart-full.svg',
-  // }
+  addProdToCart:OutputEmitterRef<IProduct> = output<IProduct>()
 
 
-  // when you want to update the stars in code
-  // this.starsComponent.setRating(0);
+  addToCart(){
+    this.addProdToCart.emit(this.product);
+  }
 
 
 

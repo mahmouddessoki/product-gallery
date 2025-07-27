@@ -4,16 +4,29 @@
       class="flex text-2xl dark:text-white uppercase tracking-tight font-bold items-center space-x-3 rtl:space-x-reverse">
       products Gallery
     </a>
-    <div>
-      <span (click)="changeMode()" class="w-8 h-8 flex dark:text-white hover:bg-gray-300 cursor-pointer duration-300 group items-center justify-center rounded-md">
+    <div class="flex items-center gap-4">
 
-        <i [class]="{
-          'fa-moon':!isDarkMode,
-          'fa-sun': isDarkMode
-        }" class="fa-solid text-xl group-hover:text-black/60"></i>
-      </span>
+
+
+      <div class="relative py-2 cursor-pointer" routerLink="/cart">
+        <div class="t-0 absolute left-3">
+          <p class="flex h-1.5 w-1.5 items-center justify-center rounded-full bg-red-500 dark:bg-red-600 p-3 text-xs text-white">{{
+            cartQty()
+            }}</p>
+        </div>
+        <i class="fa-solid fa-cart-shopping dark:text-white file: mt-4 h-6 w-6"></i>
+
 
     </div>
+    <span (click)="changeMode()"
+      class="w-8 h-8 flex dark:text-white hover:bg-gray-300 cursor-pointer duration-300 group items-center justify-center rounded-md">
+
+      <i [class]="{
+              'fa-moon':!isDarkMode,
+              'fa-sun': isDarkMode
+            }" class="fa-solid text-xl group-hover:text-black/60"></i>
+    </span>
+  </div>
 
   </div>
 </nav>

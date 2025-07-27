@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, inject, PLATFORM_ID } from '@angular/core';
+import { Component, computed, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../../features/cart/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  isDarkMode!: boolean;
   private readonly id = inject(PLATFORM_ID)
+  private readonly _cartService = inject(CartService)
+  isDarkMode!: boolean;
+  cartQty = computed(()=>this._cartService.cartQty())
+
   ngOnInit(): void {
     this.modeAfterReload()
     if (isPlatformBrowser(this.id)) {
@@ -38,12 +42,6 @@ export class NavbarComponent {
     }
   }
 
-
-
-
-
-
-
   modeAfterReload() {
     if (isPlatformBrowser(this.id)) {
       const mode = localStorage.getItem('mode')
@@ -57,7 +55,6 @@ export class NavbarComponent {
   changeMode() {
     if (isPlatformBrowser(this.id)) {
       const m = document.documentElement.classList.toggle('dark')
-
       if (m) {
         this.isDarkMode = true;
         localStorage.setItem('mode', 'dark');

@@ -1,63 +1,75 @@
-<section class="py-20">
-  <div class="max-w-screen-xl mx-auto px-5 lg:px-0 dark:text-white ">
+@if (product.id) {
 
-    <div class="grid grid-cols-12 gap-5">
+  <section class="py-20">
+    <div class="max-w-screen-xl mx-auto px-5 lg:px-0 dark:text-white ">
+      @if (errorMsg) {
+        <app-fallback-ui [errorMsg] = "errorMsg" ></app-fallback-ui>
+      }@else {
 
-      <div class="col-span-12 md:col-span-6 lg:col-span-4 shadow rounded-md border-2 border-gray-200 py-5">
-        <img [src]="product.image" alt="{{product.title}}" class="object-contain h-[400px] rounded-md mx-auto">
-      </div>
+        <div class="grid grid-cols-12 gap-5">
 
-      <div class="col-span-12 md:col-span-6 lg:col-span-8">
-        <div class="flex justify-between items-center mb-5">
-          <h2 class="text-2xl capitalize font-medium">
-            {{product.title}}
-          </h2>
-          <span class="text-xl font-semibold">
-            {{product.price | currency:'GBP'}}
-          </span>
-        </div>
-        <div class="cat_rating mb-8 flex items-center ">
-          <div
-            class="rating flex gap-3 items-center after:mx-5 after:content-[''] after:bg-gray-300  after:inline-block after:h-[25px] after:w-[4px] ">
-
-
-            <ngx-stars [customPadding]="'13px'" [customSize]="'20px'" [readonly]="true" [color]="'gold'"
-              [initialStars]="product.rating.rate">
-            </ngx-stars>
-
-            <span class="text-black text-lg">({{product.rating.rate}})</span>
-          </div>
-          <div>
-            <span
-              class="bg-green-100 capitalize text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-green-400 border border-green-400">
-              {{product.category}}
-            </span>
-
+          <div class="details-cover-container">
+            <img [src]="product.image" alt="{{product.title}}" class="object-contain h-[400px] rounded-md mx-auto">
           </div>
 
+          <div class="col-span-12 md:col-span-6 lg:col-span-8">
+            <div class="flex justify-between items-center mb-5">
+              <h2 class="text-2xl capitalize font-medium">
+                {{product.title}}
+              </h2>
+              <span class="text-xl font-semibold">
+                {{product.price | currency:'GBP'}}
+              </span>
+            </div>
+            <div class="cat_rating mb-8 flex items-center ">
+              <div
+                class="rating details-rating ">
+
+
+                <ngx-stars [customPadding]="'13px'" [customSize]="'20px'" [readonly]="true" [color]="'gold'"
+                  [initialStars]="product.rating.rate">
+                </ngx-stars>
+
+                <span class="text-black dark:text-white text-lg">({{product.rating.rate}})</span>
+              </div>
+              <div>
+                <span
+                  class="product-detail-cat">
+                  {{product.category}}
+                </span>
+
+              </div>
+
+            </div>
+
+            <p class="text-lg capitalize mb-5 ">
+              {{product.description}}
+            </p>
+
+            <div class="btns flex">
+              <button (click)="addToCart()" class="btn block w-1/6">
+                <i class="fa-solid fa-cart-plus text-4xl"></i>
+              </button>
+              <button  type="button" routerLink="/products"
+                class=" btn">
+                Continue Shopping
+              </button>
+
+            </div>
+
+
+          </div>
+
+
+
+
         </div>
+      }
 
-        <p class="text-lg capitalize mb-5 ">
-          {{product.description}}
-        </p>
-
-
-        <button type="button" routerLink="/products"
-          class=" btn">
-          Back to gallery
-        </button>
-
-
-      </div>
 
 
 
 
     </div>
-
-
-
-
-
-  </div>
-</section>
+  </section>
+}
