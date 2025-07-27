@@ -23,6 +23,9 @@ A modern eCommerce product gallery built with **Angular 19** that provides an in
 - **tailwindcss 4** - Styling and responsive design
 - **TypeScript** - Strongly typed JavaScript
 - **fakestoreapi** - Persistent data storage
+- **NGRX** - for sort state managment accross th product gallery
+- **Signals** - for cart state managment accross th product gallery
+  
 
 ---
 
